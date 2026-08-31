@@ -120,6 +120,15 @@ var id = {
     button_label: ['Submit'],
     data: { trial_category: 'id_info' },
     on_finish: function (data) {
+        // Prevent a stray blinking text caret from persisting into later trials:
+        // the autofocused input is about to be removed from the DOM, so blur it
+        // (and clear any text selection) before that happens.
+        if (document.activeElement && document.activeElement.blur) {
+            document.activeElement.blur();
+        }
+        if (window.getSelection) {
+            window.getSelection().removeAllRanges();
+        }
         var respObj = data.response;
         for (var key in respObj) {
             if (respObj[key] == workerID) {
@@ -226,11 +235,11 @@ EXPERIMENT SECTION (*sec_expt)
 
 /* -------- defining factors && exptdesign (*factors) --------*/
 
-var poss_stripe_angles = [30, 40];
+var poss_stripe_angles = [40, 60];
 var poss_identical = [true, false];
 var poss_difficulty = [20];
-var poss_rotations = [0, Math.PI/2, Math.PI];
-var poss_groups = ["allStanding","allSitting", "standingOut", "sittingOut"]; // for halves -> top row = standing, left column = sititng (will be balanced by reflection & rotation)
+var poss_rotations = [(Math.PI/18), (Math.PI/18 + Math.PI)];
+var poss_groups = ["allStanding","standingPairs"];
 
 var factors = {
     stripe_angle_top: poss_stripe_angles,
@@ -240,7 +249,7 @@ var factors = {
     group: poss_groups,
 }
 
-var full_design = jsPsych.randomization.factorial(factors, 1);
+var full_design = jsPsych.randomization.factorial(factors, 3); // note 3 to make 48 trials
 //console.log(full_design.length);
 
 /* -------  Set Preload Images for Expt (*preload_expt) -------------- */
