@@ -226,11 +226,11 @@ EXPERIMENT SECTION (*sec_expt)
 
 /* -------- defining factors && exptdesign (*factors) --------*/
 
-var poss_stripe_angles = [30, 40];
+var poss_stripe_angles = [40, 60];
 var poss_identical = [true, false];
 var poss_difficulty = [20];
-var poss_rotations = [0, Math.PI/2, Math.PI];
-var poss_groups = ["allStanding","allSitting", "standingOut", "sittingOut"]; // for halves -> top row = standing, left column = sititng (will be balanced by reflection & rotation)
+var poss_rotations = [(Math.PI/18), (Math.PI/18 + Math.PI)];
+var poss_groups = ["allStanding","standingPairs"];
 
 var factors = {
     stripe_angle_top: poss_stripe_angles,
@@ -240,7 +240,7 @@ var factors = {
     group: poss_groups,
 }
 
-var full_design = jsPsych.randomization.factorial(factors, 1);
+var full_design = jsPsych.randomization.factorial(factors, 3); // note 3 to make 48 trials
 //console.log(full_design.length);
 
 /* -------  Set Preload Images for Expt (*preload_expt) -------------- */
