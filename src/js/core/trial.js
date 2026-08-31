@@ -37,6 +37,12 @@ function runSingleTrial(
         type: jsPsychCallFunction,
         func: function () {
             document.body.style.cursor = 'none';
+            if (document.activeElement && document.activeElement.blur) {
+                document.activeElement.blur();
+            }
+            if (window.getSelection) {
+                window.getSelection().removeAllRanges();
+            }
         },
     };
 
