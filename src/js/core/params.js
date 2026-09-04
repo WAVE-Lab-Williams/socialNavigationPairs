@@ -67,10 +67,10 @@ var origStripeHeight = 931;
 
 
 
-var imgBackWidth = 675; // your desired display img width
-var imgPeopleWidth = 85; // your desired display img width
-// var imgBackWidth = 608; // possible resize
-// var imgPeopleWidth = 77; // possible resize
+// var imgBackWidth = 675; // your desired display img width
+// var imgPeopleWidth = 85; // your desired display img width
+var imgBackWidth = 608; // possible resize
+var imgPeopleWidth = 77; // possible resize
 
 var scalingBackRatio = (imgBackWidth / origBackWidth);
 var scalingPeopleRatio = (imgPeopleWidth / origPeopleWidth);
