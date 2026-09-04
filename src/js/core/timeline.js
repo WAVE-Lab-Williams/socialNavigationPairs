@@ -122,6 +122,16 @@ var id = {
     on_finish: function (data) {
         var respObj = data.response;
         for (var key in respObj) {
+            // Prevent a stray blinking text caret from persisting into later trials:
+            // the autofocused input is about to be removed from the DOM, so blur it
+            // (and clear any text selection) before that happens.
+            if (document.activeElement && document.activeElement.blur) {
+                document.activeElement.blur();
+            }
+            if (window.getSelection) {
+                window.getSelection().removeAllRanges();
+            }
+            
             if (respObj[key] == workerID) {
                 console.log(
                     'The manual type matches the query capture, going with query input.',
