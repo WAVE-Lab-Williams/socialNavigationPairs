@@ -17,13 +17,23 @@ function calcPlacements(centroids, SPIN_ANGLE, trial_type, trial_reflection) {
     p1.Adj = a - p1.x;
     
     if(trial_type.includes("Pairs")) {
-        if(SPIN_ANGLE == ((Math.PI/18))) {
-            p1.r = ((Math.atan2(p1.Opp, p1.Adj) * (180/Math.PI)) + 35);
-        } else if(SPIN_ANGLE == Math.PI/2) {
-            p1.r = ((Math.atan2(p1.Opp, p1.Adj) * (180/Math.PI)) + randomIntFromRange(-25,25) + angle_offset);
-        } else if (SPIN_ANGLE == ((Math.PI/18 + Math.PI))) {
-            p1.r = ((Math.atan2(p1.Opp, p1.Adj) * (180/Math.PI)) + 135);
-        }
+        if(trial_type === "verticalPairs") {
+            if(SPIN_ANGLE == ((Math.PI/3))) {
+                p1.r = ((Math.atan2(p1.Opp, p1.Adj) * (180/Math.PI)) + 130);
+            } else if(SPIN_ANGLE == Math.PI/2) {
+                p1.r = ((Math.atan2(p1.Opp, p1.Adj) * (180/Math.PI)) + randomIntFromRange(-25,25) + angle_offset);
+            } else if (SPIN_ANGLE == ((Math.PI/3 + Math.PI))) {
+                p1.r = ((Math.atan2(p1.Opp, p1.Adj) * (180/Math.PI)) + 135);
+            };
+        } else if(trial_type === "horizontalPairs") {
+            if(SPIN_ANGLE == ((Math.PI/3))) {
+                p1.r = ((Math.atan2(p1.Opp, p1.Adj) * (180/Math.PI)) + 35);
+            } else if(SPIN_ANGLE == Math.PI/2) {
+                p1.r = ((Math.atan2(p1.Opp, p1.Adj) * (180/Math.PI)) + randomIntFromRange(-25,25) + angle_offset);
+            } else if (SPIN_ANGLE == ((Math.PI/3 + Math.PI))) {
+                p1.r = ((Math.atan2(p1.Opp, p1.Adj) * (180/Math.PI)) + 135);
+            };
+        };
     } else {
         p1.r = ((Math.atan2(p1.Opp, p1.Adj) * (180/Math.PI)) + randomIntFromRange(-25,25) + angle_offset);
     }
@@ -33,41 +43,61 @@ function calcPlacements(centroids, SPIN_ANGLE, trial_type, trial_reflection) {
 
     const p2 = {};
 
-    p2.x = (a - RADIUS*Math.cos(SPIN_ANGLE + 2/6*Math.PI) + randomIntFromRange(-2, 2));
-    p2.y = (b - RADIUS*Math.sin(SPIN_ANGLE + 2/6*Math.PI) + randomIntFromRange(-2, 2));
+    p2.x = (a - RADIUS*Math.cos(SPIN_ANGLE + 2/4*Math.PI) + randomIntFromRange(-2, 2));
+    p2.y = (b - RADIUS*Math.sin(SPIN_ANGLE + 2/4*Math.PI) + randomIntFromRange(-2, 2));
     
     p2.Opp = b - p2.y;
     p2.Adj = a - p2.x;
 
     if(trial_type.includes("Pairs")) {
-        if(SPIN_ANGLE == ((Math.PI/18))) {
-            p2.r = ((Math.atan2(p2.Opp, p2.Adj) * (180/Math.PI)) + 165.5);
-        } else if (SPIN_ANGLE == Math.PI/2) {
-            p2.r = ((Math.atan2(p2.Opp, p2.Adj) * (180/Math.PI)) + 0);
-        } else if(SPIN_ANGLE == ((Math.PI/18 + Math.PI))) {
-            p2.r = ((Math.atan2(p2.Opp, p2.Adj) * (180/Math.PI)) + 35);
-        }
+        if(trial_type === "verticalPairs") {
+            if(SPIN_ANGLE == ((Math.PI/3))) {
+                p2.r = ((Math.atan2(p2.Opp, p2.Adj) * (180/Math.PI)) + 50);
+            } else if (SPIN_ANGLE == Math.PI/2) {
+                p2.r = ((Math.atan2(p2.Opp, p2.Adj) * (180/Math.PI)) + 0);
+            } else if(SPIN_ANGLE == ((Math.PI/3 + Math.PI))) {
+                p2.r = ((Math.atan2(p2.Opp, p2.Adj) * (180/Math.PI)) + 35);
+            };
+        } else if(trial_type === "horizontalPairs") {
+            if(SPIN_ANGLE == ((Math.PI/3))) {
+                p2.r = ((Math.atan2(p2.Opp, p2.Adj) * (180/Math.PI)) + 165.5);
+            } else if (SPIN_ANGLE == Math.PI/2) {
+                p2.r = ((Math.atan2(p2.Opp, p2.Adj) * (180/Math.PI)) + 0);
+            } else if(SPIN_ANGLE == ((Math.PI/3 + Math.PI))) {
+                p2.r = ((Math.atan2(p2.Opp, p2.Adj) * (180/Math.PI)) + 35);
+            };
+        };
     } else {
         p2.r = ((Math.atan2(p2.Opp, p2.Adj) * (180/Math.PI)) + randomIntFromRange(-25,25) + angle_offset);
     }
     
     const p3 = {};
 
-    p3.x = (a - RADIUS*Math.cos(SPIN_ANGLE + 4/6*Math.PI) + randomIntFromRange(-2, 2));
-    p3.y = (b - RADIUS*Math.sin(SPIN_ANGLE + 4/6*Math.PI) + randomIntFromRange(-2, 2));
+    p3.x = (a - RADIUS*Math.cos(SPIN_ANGLE + 4/4*Math.PI) + randomIntFromRange(-2, 2));
+    p3.y = (b - RADIUS*Math.sin(SPIN_ANGLE + 4/4*Math.PI) + randomIntFromRange(-2, 2));
 
 
     p3.Opp = b - p3.y;
     p3.Adj = a - p3.x;
 
     if(trial_type.includes("Pairs")) {
-        if(SPIN_ANGLE == ((Math.PI/18))) {
-            p3.r = ((Math.atan2(p3.Opp, p3.Adj) * (180/Math.PI)) + 17.5);
-        } else if (SPIN_ANGLE == Math.PI/2) {
-            p3.r = ((Math.atan2(p3.Opp, p3.Adj) * (180/Math.PI)) + randomIntFromRange(-25,25) + angle_offset);
-        } else if(SPIN_ANGLE == ((Math.PI/18 + Math.PI))) {
-            p3.r = ((Math.atan2(p3.Opp, p3.Adj) * (180/Math.PI)) + 135);
-        }
+        if(trial_type === "verticalPairs") {
+            if(SPIN_ANGLE == ((Math.PI/3))) {
+                p3.r = ((Math.atan2(p3.Opp, p3.Adj) * (180/Math.PI)) + 130);
+            } else if (SPIN_ANGLE == Math.PI/2) {
+                p3.r = ((Math.atan2(p3.Opp, p3.Adj) * (180/Math.PI)) + randomIntFromRange(-25,25) + angle_offset);
+            } else if(SPIN_ANGLE == ((Math.PI/3 + Math.PI))) {
+                p3.r = ((Math.atan2(p3.Opp, p3.Adj) * (180/Math.PI)) + 135);
+            };    
+        } else if(trial_type === "horizontalPairs") {
+            if(SPIN_ANGLE == ((Math.PI/3))) {
+                p3.r = ((Math.atan2(p3.Opp, p3.Adj) * (180/Math.PI)) + 17.5);
+            } else if (SPIN_ANGLE == Math.PI/2) {
+                p3.r = ((Math.atan2(p3.Opp, p3.Adj) * (180/Math.PI)) + randomIntFromRange(-25,25) + angle_offset);
+            } else if(SPIN_ANGLE == ((Math.PI/3 + Math.PI))) {
+                p3.r = ((Math.atan2(p3.Opp, p3.Adj) * (180/Math.PI)) + 135);
+            };
+        };
     } else {
         p3.r = ((Math.atan2(p3.Opp, p3.Adj) * (180/Math.PI)) + randomIntFromRange(-25,25) + angle_offset);
     }
@@ -80,66 +110,76 @@ function calcPlacements(centroids, SPIN_ANGLE, trial_type, trial_reflection) {
 
     const p4 = {};
 
-    p4.x = (c - RADIUS*Math.cos(SPIN_ANGLE + 6/6*Math.PI) + randomIntFromRange(-2, 2));
-    p4.y = (d - RADIUS*Math.sin(SPIN_ANGLE + 6/6*Math.PI) + randomIntFromRange(-2, 2));
+    p4.x = (c - RADIUS*Math.cos(SPIN_ANGLE + 6/4*Math.PI) + randomIntFromRange(-2, 2));
+    p4.y = (d - RADIUS*Math.sin(SPIN_ANGLE + 6/4*Math.PI) + randomIntFromRange(-2, 2));
     
     p4.Opp = d - p4.y;
     p4.Adj = c - p4.x;
     
     if(trial_type.includes("Pairs")) {
-        if(SPIN_ANGLE == ((Math.PI/18))) {
-            p4.r = ((Math.atan2(p4.Opp, p4.Adj) * (180/Math.PI)) + 125);
-        } else if (SPIN_ANGLE == Math.PI/2) {
-            p4.r = ((Math.atan2(p4.Opp, p4.Adj) * (180/Math.PI)) + randomIntFromRange(-25,25) + angle_offset);
-        } else if(SPIN_ANGLE == ((Math.PI/18 + Math.PI))) {
-            p4.r = ((Math.atan2(p4.Opp, p4.Adj) * (180/Math.PI)) + 30);
-        }
+        if(trial_type === "verticalPairs") {
+            if(SPIN_ANGLE == ((Math.PI/3))) {
+                p4.r = ((Math.atan2(p4.Opp, p4.Adj) * (180/Math.PI)) + 35);
+            } else if (SPIN_ANGLE == Math.PI/2) {
+                p4.r = ((Math.atan2(p4.Opp, p4.Adj) * (180/Math.PI)) + randomIntFromRange(-25,25) + angle_offset);
+            } else if(SPIN_ANGLE == ((Math.PI/3 + Math.PI))) {
+                p4.r = ((Math.atan2(p4.Opp, p4.Adj) * (180/Math.PI)) + 30);
+            };
+        } else if(trial_type === "horizontalPairs") {
+            if(SPIN_ANGLE == ((Math.PI/3))) {
+                p4.r = ((Math.atan2(p4.Opp, p4.Adj) * (180/Math.PI))  + 125);
+            } else if (SPIN_ANGLE == Math.PI/2) {
+                p4.r = ((Math.atan2(p4.Opp, p4.Adj) * (180/Math.PI)) + randomIntFromRange(-25,25) + angle_offset);
+            } else if(SPIN_ANGLE == ((Math.PI/3 + Math.PI))) {
+                p4.r = ((Math.atan2(p4.Opp, p4.Adj) * (180/Math.PI)) + 30);
+            };
+        }; // end verticalPairs
     } else {
         p4.r = ((Math.atan2(p4.Opp, p4.Adj) * (180/Math.PI)) + randomIntFromRange(-25,25) + angle_offset);
     };
 
-    const p5 = {};
+    // const p5 = {};
 
-    p5.x = (c - RADIUS*Math.cos(SPIN_ANGLE + 8/6*Math.PI) + randomIntFromRange(-2, 2));
-    p5.y = (d - RADIUS*Math.sin(SPIN_ANGLE + 8/6*Math.PI) + randomIntFromRange(-2, 2));
+    // p5.x = (c - RADIUS*Math.cos(SPIN_ANGLE + 8/6*Math.PI) + randomIntFromRange(-2, 2));
+    // p5.y = (d - RADIUS*Math.sin(SPIN_ANGLE + 8/6*Math.PI) + randomIntFromRange(-2, 2));
     
-    p5.Opp = d - p5.y;
-    p5.Adj = c - p5.x;
+    // p5.Opp = d - p5.y;
+    // p5.Adj = c - p5.x;
 
 
-    if(trial_type.includes("Pairs")) {
-        if(SPIN_ANGLE == ((Math.PI/18))) {
-            p5.r = ((Math.atan2(p5.Opp, p5.Adj) * (180/Math.PI)) + 30);
-        } else if (SPIN_ANGLE == Math.PI/2) {
-            p5.r = ((Math.atan2(p5.Opp, p5.Adj) * (180/Math.PI)) + randomIntFromRange(-25,25) + angle_offset);
-        } else if(SPIN_ANGLE == ((Math.PI/18 + Math.PI))) {
-            p5.r = ((Math.atan2(p5.Opp, p5.Adj) * (180/Math.PI)) + 137.5);
-        }
-    } else {
-        p5.r = ((Math.atan2(p5.Opp, p5.Adj) * (180/Math.PI)) + randomIntFromRange(-25,25) + angle_offset);
-    };
+    // if(trial_type.includes("Pairs")) {
+    //     if(SPIN_ANGLE == ((Math.PI/18))) {
+    //         p5.r = ((Math.atan2(p5.Opp, p5.Adj) * (180/Math.PI)) + 30);
+    //     } else if (SPIN_ANGLE == Math.PI/2) {
+    //         p5.r = ((Math.atan2(p5.Opp, p5.Adj) * (180/Math.PI)) + randomIntFromRange(-25,25) + angle_offset);
+    //     } else if(SPIN_ANGLE == ((Math.PI/18 + Math.PI))) {
+    //         p5.r = ((Math.atan2(p5.Opp, p5.Adj) * (180/Math.PI)) + 137.5);
+    //     }
+    // } else {
+    //     p5.r = ((Math.atan2(p5.Opp, p5.Adj) * (180/Math.PI)) + randomIntFromRange(-25,25) + angle_offset);
+    // };
     
 
     
-    const p6 = {};
+    // const p6 = {};
 
-    p6.x = (c - RADIUS*Math.cos(SPIN_ANGLE + 10/6*Math.PI) + randomIntFromRange(-2, 2));
-    p6.y = (d - RADIUS*Math.sin(SPIN_ANGLE + 10/6*Math.PI) + randomIntFromRange(-2, 2));
+    // p6.x = (c - RADIUS*Math.cos(SPIN_ANGLE + 10/6*Math.PI) + randomIntFromRange(-2, 2));
+    // p6.y = (d - RADIUS*Math.sin(SPIN_ANGLE + 10/6*Math.PI) + randomIntFromRange(-2, 2));
 
-    p6.Opp = d - p6.y;
-    p6.Adj = c - p6.x;
+    // p6.Opp = d - p6.y;
+    // p6.Adj = c - p6.x;
 
-    if(trial_type.includes("Pairs")) {
-        if(SPIN_ANGLE == ((Math.PI/18))) {
-            p6.r = ((Math.atan2(p6.Opp, p6.Adj) * (180/Math.PI)) + 137.5);
-        } else if (SPIN_ANGLE == Math.PI/2) {
-            p6.r = ((Math.atan2(p6.Opp, p6.Adj) * (180/Math.PI)) + randomIntFromRange(-25,25) + angle_offset);
-        } else if(SPIN_ANGLE == ((Math.PI/18 + Math.PI))) {
-            p6.r = ((Math.atan2(p6.Opp, p6.Adj) * (180/Math.PI)) + 30);
-        }
-    } else {
-        p6.r = ((Math.atan2(p6.Opp, p6.Adj) * (180/Math.PI)) + randomIntFromRange(-25,25) + angle_offset);
-    };
+    // if(trial_type.includes("Pairs")) {
+    //     if(SPIN_ANGLE == ((Math.PI/18))) {
+    //         p6.r = ((Math.atan2(p6.Opp, p6.Adj) * (180/Math.PI)) + 137.5);
+    //     } else if (SPIN_ANGLE == Math.PI/2) {
+    //         p6.r = ((Math.atan2(p6.Opp, p6.Adj) * (180/Math.PI)) + randomIntFromRange(-25,25) + angle_offset);
+    //     } else if(SPIN_ANGLE == ((Math.PI/18 + Math.PI))) {
+    //         p6.r = ((Math.atan2(p6.Opp, p6.Adj) * (180/Math.PI)) + 30);
+    //     }
+    // } else {
+    //     p6.r = ((Math.atan2(p6.Opp, p6.Adj) * (180/Math.PI)) + randomIntFromRange(-25,25) + angle_offset);
+    // };
    
 
     // /* new bottom 2 triangles */
@@ -223,7 +263,7 @@ function calcPlacements(centroids, SPIN_ANGLE, trial_type, trial_reflection) {
 
 
     //return [p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12];
-    return [p1, p2, p3, p4, p5, p6];
+    return [p1, p2, p3, p4];
 }; //end calcPlacements
      
 

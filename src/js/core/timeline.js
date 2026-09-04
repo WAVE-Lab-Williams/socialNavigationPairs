@@ -229,9 +229,8 @@ EXPERIMENT SECTION (*sec_expt)
 var poss_stripe_angles = [40, 60];
 var poss_identical = [true, false];
 var poss_difficulty = [20];
-var poss_rotations = [(Math.PI/18), (Math.PI/18 + Math.PI)];
-var poss_groups = ["allStanding","standingPairs"];
-
+var poss_rotations = [Math.PI/3, (Math.PI/3 + Math.PI)];
+var poss_groups = ["allStanding","horizontalPairs", "verticalPairs", "boxes"];
 var factors = {
     stripe_angle_top: poss_stripe_angles,
     rotation: poss_rotations,
@@ -240,7 +239,7 @@ var factors = {
     group: poss_groups,
 }
 
-var full_design = jsPsych.randomization.factorial(factors, 3); // note 3 to make 48 trials
+var full_design = jsPsych.randomization.factorial(factors, 1); 
 //console.log(full_design.length);
 
 /* -------  Set Preload Images for Expt (*preload_expt) -------------- */
