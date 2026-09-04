@@ -252,6 +252,7 @@ for (var i = 0; i < poss_stripe_angles.length; i++) {
 for (var i = 0; i < allPeopleColors.length; i++) { // used to be hardcoded, but because allPeopleColors is defined in params.js, which is laoded before timeline.js, we are good.
      forPreload.push(`${stimFolder}${allPeopleColors[i]}.png`);
      forPreload.push(`${stimFolder}sitting/${allPeopleColors[i]}.png`);
+     forPreload.push(`${stimFolder}boxes/${allPeopleColors[i]}.png`)
 }
 
 /* ------- timeline expt push (*pushExpt ) -------------- */
