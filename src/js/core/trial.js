@@ -177,7 +177,7 @@ function runSingleTrial(
             // htmloutput += `<img src="${personRight}" style="width: ${imgStripePeopleWidth}px; position: absolute; top: ${imgBackHeight*.76-(imgPeopleHeight/2)}px; left: ${imgBackWidth*0.275-(imgPeopleWidth/2)}px;"></img></div>`
 
             // for resize dims
-            htmloutput += `<img src="${personRight}" style="width: ${imgStripePeopleWidth}px; position: absolute; top: ${imgBackHeight*.81-(imgPeopleHeight/2)}px; left: ${imgBackWidth*0.331-(imgPeopleWidth/2)}px;"></img></div>`
+            htmloutput += `<img src="${personRight}" style="width: ${imgStripePeopleWidth}px; position: absolute; top: ${imgBackHeight*.84-(imgPeopleHeight/2)}px; left: ${imgBackWidth*0.331-(imgPeopleWidth/2)}px;"></img></div>`
             return htmloutput;
         },
         choices: ['f', 'j'],
