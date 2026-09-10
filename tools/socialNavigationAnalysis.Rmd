@@ -1,5 +1,5 @@
 ---
-title: "socialNavigationAnalysis"
+title: "socialNavigationPairsAnalysis"
 author: "Neel"
 date: "2026-05-24"
 output: pdf_document
@@ -7,7 +7,7 @@ output: pdf_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-setwd("C:/Users/mcpro/OneDrive/Documents/WAVE LAB/Code/socialNavigation/tools")
+setwd("C:/Users/mcpro/OneDrive/Documents/WAVE LAB/Code/socialNavigationPairs/tools")
 
 library(tidyverse)
 library(paletteer)
@@ -113,31 +113,39 @@ rt_by_group <- fused_ind_exclude |>
 
 ggplot(rt_by_group, aes(x=background_group, y=mean, fill=background_group)) +
   geom_col() + 
-  geom_errorbar(aes(ymin=mean-se, ymax=mean+se)) +
+  geom_errorbar(aes(ymin=mean-se, ymax=mean+se, width=0.2)) +
   labs(title= "Task Reaction Time by Background Group, Filtered", x="Conditon", y="Reaction Time, ms") +
-  scale_fill_paletteer_d("MetBrewer::Austria")
+  scale_fill_paletteer_d("khroma::highcontrast")
 
 
 
 ```
-
 
 ```{r}
 grouped_data_RT <- fused_ind_exclude |>
   filter(accuracy == 1) |>
   group_by(participant_id, background_group) |>
   summarize(meanRT = mean(response_time)) |>
-  ungroup()
+  ungroup() 
+# |>
+#   pivot_wider(
+#     names_from = "participant_id", 
+#     values_from = "meanRT"
+#   )
 
 
-RT_anova <- aov_ez(id = "participant_id",
-                   dv = "meanRT",
-                   data = grouped_data_RT,
-                   within = "background_group")
 
-summary(RT_anova)
-
-emmeans(RT_anova, pairwise ~ background_group, adjust = "tukey")
+t.test(meanRT ~ background_group, data=grouped_data_RT, Pair=TRUE)
+# 
+# 
+# RT_anova <- aov_ez(id = "participant_id",
+#                    dv = "meanRT",
+#                    data = grouped_data_RT,
+#                    within = "background_group")
+# 
+# summary(RT_anova)
+# 
+# emmeans(RT_anova, pairwise ~ background_group, adjust = "tukey")
 
 
 
@@ -157,7 +165,7 @@ accuracy_data <- fused_ind_exclude |>
 
 ggplot(accuracy_data, aes(x=background_group, y=mean, fill=background_group)) +
   geom_col() +
-  geom_errorbar(aes(ymin= mean - se, ymax = mean + se)) +
+  geom_errorbar(aes(ymin= mean - se, ymax = mean + se, width=0.2)) +
   labs(title = "Stripe Angle Match Accuracy by Background Group", x="Condition", y= "Accuracy") + 
   scale_fill_paletteer_d("MoMAColors::Budnitz")
 
@@ -167,6 +175,7 @@ grouped_data_Acc <- fused_ind_exclude |>
   summarize(meanAcc = mean(accuracy)) |>
   ungroup()
 
+t.test(meanAcc ~ background_group, data=grouped_data_Acc, Pair=TRUE)
 
 acc_anova <- aov_ez(id = "participant_id",
                    dv = "meanAcc",
@@ -194,7 +203,7 @@ rt_by_rotation <- fused_ind_exclude |>
 
 ggplot(rt_by_rotation, aes(x=trial_rotation, y=mean, fill=trial_rotation)) +
   geom_col() + 
-  geom_errorbar(aes(ymin=mean-se, ymax=mean+se)) +
+  geom_errorbar(aes(ymin=mean-se, ymax=mean+se, width=0.2)) +
   labs(title= "Task Reaction Time by Rotation, Filtered", x="Rotation, Degrees", y="Reaction Time, ms")
 
 
@@ -210,7 +219,7 @@ rt_by_reflection <- fused_ind_exclude |>
 
 ggplot(rt_by_reflection, aes(x=trial_reflection, y=mean, fill=trial_reflection)) +
   geom_col() + 
-  geom_errorbar(aes(ymin=mean-se, ymax=mean+se)) +
+  geom_errorbar(aes(ymin=mean-se, ymax=mean+se, width=0.2)) +
   labs(title= "Task Reaction Time by Reflection", x="Reflection", y="Reaction Time, ms")
 
 
@@ -353,9 +362,9 @@ rt_by_group <- firstHalf_data |>
 
 ggplot(rt_by_group, aes(x=background_group, y=mean, fill=background_group)) +
   geom_col() + 
-  geom_errorbar(aes(ymin=mean-se, ymax=mean+se)) +
+  geom_errorbar(aes(ymin=mean-se, ymax=mean+se, width=0.2)) +
   labs(title= "Task Reaction Time by Background Group, First Half", x="Conditon", y="Reaction Time, ms") +
-  scale_fill_paletteer_d("MetBrewer::Austria")
+  scale_fill_paletteer_d("khroma::highcontrast")
 
 
 ```
@@ -393,9 +402,9 @@ rt_by_group <- secondHalf_data |>
 
 ggplot(rt_by_group, aes(x=background_group, y=mean, fill=background_group)) +
   geom_col() + 
-  geom_errorbar(aes(ymin=mean-se, ymax=mean+se)) +
+  geom_errorbar(aes(ymin=mean-se, ymax=mean+se, width=0.2)) +
   labs(title= "Task Reaction Time by Background Group, Second Half", x="Conditon", y="Reaction Time, ms") +
-  scale_fill_paletteer_d("MetBrewer::Austria")
+  scale_fill_paletteer_d("khroma::highcontrast")
 
 ```
 
@@ -410,6 +419,7 @@ grouped_data_RT <- secondHalf_data |>
 
 grouped_data_RT$background_group = as.factor(grouped_data_RT$background_group)
   
+t.test(meanRT ~ background_group, data=grouped_data_RT)
   
 RT_anova <- aov_ez(id = "participant_id",
                    dv = "meanRT",

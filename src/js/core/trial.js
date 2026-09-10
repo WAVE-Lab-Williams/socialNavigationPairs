@@ -63,43 +63,6 @@ function runSingleTrial(
     
     var persistent_prompt = `<div style="position: fixed; top: 90%; left: 10%; transform: translateX(-50%); text-align: center;">f = same stripes<br> j = different stripes </div>`;
 
-    /* testing a slider */
-    // tarSize = 40;
-    // var dispCircleSlider = {
-    //     type: jsPsychHtmlSliderResponseResizing,
-    //     stimulus: `<img src="${thisStim}" />`,
-    //     slider_start: 70,
-    //     min: 20,
-    //     max: 120,
-    //     slider_width: 500,
-    //     labels: ["smaller","larger"],
-    //     trial_duration: null,
-    //     response_ends_trial: true,
-    //     prompt: `${persistent_prompt}`,
-    //     data: {
-    //         trial_category: 'answer'+trialType,
-    //         trial_stimulus: thisStim,
-    //         correct_response: tarSize,
-    //     }, // data end
-    //     on_finish: function(data){
-    //         data.thisDifference = data.response - tarSize
-    //     } // on finish end
-    // }; // dispCircle end
-
-    //  var disp = {
-    //     type: jsPsychHtmlKeyboardResponse,
-    //     stimulus: `<div style="position: absolute; top: ${h/2-imgBackHeight/2}px; left: ${w/2-imgBackWidth/2}px; transform: rotate(0deg);">
-    //                 <div style="position: absolute; top: 0px; left: 0px;"><img src="${stimFolder}sN_35_blank.png" style="width: ${imgBackWidth}px;"> </img></div>
-    //                 </div>`,
-    //     choices: ['f', 'j'],
-    //     trial_duration: BACKGROUND_DISP_TIME,
-    //     response_ends_trial: true,
-    //     prompt: `${persistent_prompt}`,
-    //     data: {
-    //         trial_category: 'prestimBackground'+trialType,
-    //     }, // data end
-    // }; // dispCircle end
-
 
     /* Rotation and Reflection Logic */
     var poss_trialRotations = [0, 180]; // this one is in degrees!
@@ -134,7 +97,7 @@ function runSingleTrial(
     
     var htmloutput = `<div style= "width: 600px; height: 600px; position: absolute; top: 50%; left: 50%; z-index: -999; transform: translate(-50%, -50%) rotate(${trialRotation}deg) scaleX(${trialReflection});"><img src="${stimFolder}background_border.png" style="width: ${imgBorderWidth}px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></img>`;
         for(var i = 0; i < all_points.length; i++) {
-            if(group === "allStanding" || group === "standingPairs") { //note the triple equals is on purpose (apparently it's the js version of .equals?)
+            if(group === "allStanding" || group.includes("Pairs")) { //note the triple equals is on purpose (apparently it's the js version of .equals?)
                 htmloutput += `<img src="${stimFolder}${allPeople[i]}.png" style = "position: absolute; top: ${all_points[i].y}px; left: ${all_points[i].x}px; width: ${imgPeopleWidth}px; transform: translate(-50%, -50%) rotate(${all_points[i].r}deg);"></img>`;
             };
             if(group === "halfHorizontal") {
@@ -151,8 +114,8 @@ function runSingleTrial(
                     htmloutput += `<img src="${stimFolder}${allPeople[i]}.png" style = "position: absolute; top: ${all_points[i].y}px; left: ${all_points[i].x}px; width: ${imgPeopleWidth}px; transform: translate(-50%, -50%) rotate(${all_points[i].r}deg);"></img>`;
                 }
             };
-            if(group === "allSitting" || group === "sittingOut") {
-                htmloutput += `<img src="${stimFolder}sitting/${allPeople[i]}.png" style = "position: absolute; top: ${all_points[i].y}px; left: ${all_points[i].x}px; width: ${imgPeopleWidth}px; transform: translate(-50%, -50%) rotate(${all_points[i].r}deg);"></img>`;
+            if(group === "boxes") {
+                htmloutput += `<img src="${stimFolder}boxes/${allPeople[i]}.png" style = "position: absolute; top: ${all_points[i].y}px; left: ${all_points[i].x}px; width: ${imgPeopleWidth}px; transform: translate(-50%, -50%) rotate(${all_points[i].r}deg);"></img>`;
             };
         }; // end for loop!
         htmloutput += `</div>`;
@@ -180,7 +143,14 @@ function runSingleTrial(
         type: jsPsychHtmlKeyboardResponse,
         stimulus: function() {
             htmloutput = htmloutput.replace(`</div>`, ``);
-            htmloutput += `<img src="${personLeft}" style="width: ${imgStripePeopleWidth}px; position: absolute; top: ${imgBackHeight*.005-(imgPeopleHeight/2)}px; left: ${imgBackWidth*.61-(imgPeopleWidth/2)}px; z-index: 999; transform: rotate(180deg);"></img></div>`;
+            // for original dims
+            // htmloutput += `<img src="${personLeft}" style="width: ${imgStripePeopleWidth}px; position: absolute; top: ${imgBackHeight*.005-(imgPeopleHeight/2)}px; left: ${imgBackWidth*.61-(imgPeopleWidth/2)}px; z-index: 999; transform: rotate(180deg);"></img></div>`;
+            
+            // for original dims, but closer stripes
+            // htmloutput += `<img src="${personLeft}" style="width: ${imgStripePeopleWidth}px; position: absolute; top: ${imgBackHeight*.155-(imgPeopleHeight/2)}px; left: ${imgBackWidth*.61-(imgPeopleWidth/2)}px; z-index: 999; transform: rotate(180deg);"></img></div>`;
+
+            // for resize dims
+            htmloutput += `<img src="${personLeft}" style="width: ${imgStripePeopleWidth}px; position: absolute; top: ${imgBackHeight*.155-(imgPeopleHeight/2)}px; left: ${imgBackWidth*.665-(imgPeopleWidth/2)}px; z-index: 999; transform: rotate(180deg);"></img></div>`;
             return htmloutput;
         },
         choices: 'NO_KEYS',
@@ -199,7 +169,14 @@ function runSingleTrial(
         type: jsPsychHtmlKeyboardResponse,
         stimulus: function() {
             htmloutput = htmloutput.replace(`</div>`, ``);
-            htmloutput += `<img src="${personRight}" style="width: ${imgStripePeopleWidth}px; position: absolute; top: ${imgBackHeight*.86-(imgPeopleHeight/2)}px; left: ${imgBackWidth*0.275-(imgPeopleWidth/2)}px;"></img></div>`
+            // for original dims
+            // htmloutput += `<img src="${personRight}" style="width: ${imgStripePeopleWidth}px; position: absolute; top: ${imgBackHeight*.86-(imgPeopleHeight/2)}px; left: ${imgBackWidth*0.275-(imgPeopleWidth/2)}px;"></img></div>`
+            
+            // for original dims, but closer stripes
+            // htmloutput += `<img src="${personRight}" style="width: ${imgStripePeopleWidth}px; position: absolute; top: ${imgBackHeight*.76-(imgPeopleHeight/2)}px; left: ${imgBackWidth*0.275-(imgPeopleWidth/2)}px;"></img></div>`
+
+            // for resize dims
+            htmloutput += `<img src="${personRight}" style="width: ${imgStripePeopleWidth}px; position: absolute; top: ${imgBackHeight*.84-(imgPeopleHeight/2)}px; left: ${imgBackWidth*0.331-(imgPeopleWidth/2)}px;"></img></div>`
             return htmloutput;
         },
         choices: ['f', 'j'],
