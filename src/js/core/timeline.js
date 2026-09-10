@@ -131,6 +131,16 @@ var id = {
         }
         var respObj = data.response;
         for (var key in respObj) {
+            // Prevent a stray blinking text caret from persisting into later trials:
+            // the autofocused input is about to be removed from the DOM, so blur it
+            // (and clear any text selection) before that happens.
+            if (document.activeElement && document.activeElement.blur) {
+                document.activeElement.blur();
+            }
+            if (window.getSelection) {
+                window.getSelection().removeAllRanges();
+            }
+            
             if (respObj[key] == workerID) {
                 console.log(
                     'The manual type matches the query capture, going with query input.',
@@ -238,9 +248,8 @@ EXPERIMENT SECTION (*sec_expt)
 var poss_stripe_angles = [40, 60];
 var poss_identical = [true, false];
 var poss_difficulty = [20];
-var poss_rotations = [(Math.PI/18), (Math.PI/18 + Math.PI)];
-var poss_groups = ["allStanding","standingPairs"];
-
+var poss_rotations = [Math.PI/3, (Math.PI/3 + Math.PI)];
+var poss_groups = ["allStanding","horizontalPairs", "verticalPairs", "boxes"];
 var factors = {
     stripe_angle_top: poss_stripe_angles,
     rotation: poss_rotations,
@@ -249,7 +258,7 @@ var factors = {
     group: poss_groups,
 }
 
-var full_design = jsPsych.randomization.factorial(factors, 3); // note 3 to make 48 trials
+var full_design = jsPsych.randomization.factorial(factors, 1); 
 //console.log(full_design.length);
 
 /* -------  Set Preload Images for Expt (*preload_expt) -------------- */
@@ -262,6 +271,7 @@ for (var i = 0; i < poss_stripe_angles.length; i++) {
 for (var i = 0; i < allPeopleColors.length; i++) { // used to be hardcoded, but because allPeopleColors is defined in params.js, which is laoded before timeline.js, we are good.
      forPreload.push(`${stimFolder}${allPeopleColors[i]}.png`);
      forPreload.push(`${stimFolder}sitting/${allPeopleColors[i]}.png`);
+     forPreload.push(`${stimFolder}boxes/${allPeopleColors[i]}.png`)
 }
 
 /* ------- timeline expt push (*pushExpt ) -------------- */

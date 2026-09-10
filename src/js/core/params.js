@@ -23,7 +23,7 @@ var U_RIGHT_CENTROID = [425, 200];
 var L_LEFT_CENTROID = [175, 400];
 var L_RIGHT_CENTROID = [425, 400];
 var CENTROIDS = [U_LEFT_CENTROID, U_RIGHT_CENTROID, L_LEFT_CENTROID, L_RIGHT_CENTROID];
-var RADIUS = 145; 
+var RADIUS = 110; 
 var allPeopleColors = ["red", "orange1", "orange2", "green1", "green3", "blue2", "blue3", "blue4", "blue5", "purple", "magenta", "pink"];
 // Variables for Participant Information
 var estTotalRunTime = 7;
@@ -67,8 +67,10 @@ var origStripeHeight = 931;
 
 
 
-var imgBackWidth = 675; // your desired display img width
-var imgPeopleWidth = 85; // your desired display img width
+// var imgBackWidth = 675; // your desired display img width
+// var imgPeopleWidth = 85; // your desired display img width
+var imgBackWidth = 608; // possible resize
+var imgPeopleWidth = 77; // possible resize
 
 var scalingBackRatio = (imgBackWidth / origBackWidth);
 var scalingPeopleRatio = (imgPeopleWidth / origPeopleWidth);
